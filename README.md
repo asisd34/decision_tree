@@ -19,3 +19,4 @@ Kolesterol (Cholesterol): Hastaların kolesterol seviyelerini temsil eder. Kateg
 Na/K Oranı (Na_to_K): Hastaların sodyum (Na) ve potasyum (K) oranını temsil eder. Bu sayısal bir değerdir.
 
 İlaç (Drug): Hastaların yanıt verdiği ilacı temsil eder. Bu, modelimizin tahmin etmeye çalışacağı hedef değişkendir ve genellikle "İlaç A", "İlaç B", "İlaç C", "İlaç X" ve "İlaç Y" gibi kategorik değerler alır.
+Dataset: https://www.kaggle.com/datasets/pablomgomez21/drugs-a-b-c-x-y-for-decision-trees
