@@ -29,21 +29,16 @@ data["Kan_Basıncı"] = le.fit_transform(data["Kan_Basıncı"])
 data["Kolesterol"] = le.fit_transform(data["Kolesterol"])
 print(data.info())
 
-# Bağımsız değişkenler ve hedef değişken arasında ayırma
-X = data.drop("İlaç", axis=1)
-y = data["İlaç"]
+from sklearn.preprocessing import LabelEncoder
 
-# Eğitim ve test setlerine ayırma
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# LabelEncoder oluşturma
+le = LabelEncoder()
 
-# Karar ağacı modelini oluşturma
-clf = DecisionTreeClassifier(random_state=42)
-clf.fit(X_train, y_train)
+# İlaç sütununu sayısallaştırma
+data["İlaç"] = le.fit_transform(data["İlaç"])
 
-# Karar ağacını görselleştirme
-plt.figure(figsize=(15, 10))
-plot_tree(clf, feature_names=X.columns, class_names=clf.classes_, filled=True)
-plt.show()
+# Sonuçları kontrol etme
+print(data.head())
 
 # Korelasyon matrisini hesaplama
 correlation_matrix = data.corr()
@@ -57,6 +52,27 @@ plt.show()
 # İkili değişken grafiklerini çizme
 sns.pairplot(data)
 plt.show()
+
+# Bağımsız değişkenler ve hedef değişken arasında ayırma
+X = data.drop("İlaç", axis=1)
+y = data["İlaç"]
+
+# Eğitim ve test setlerine ayırma
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Karar ağacı modelini oluşturma
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
+
+# Karar ağacını görselleştirme
+plt.figure(figsize=(15, 10))
+#plot_tree(clf, feature_names=X.columns, class_names=clf.classes_, filled=True)
+plot_tree(clf, feature_names=X.columns, class_names=[str(c) for c in clf.classes_], filled=True)
+plt.show()
+
+
+
+
 
 # Test seti üzerinde tahmin yapma
 y_pred = clf.predict(X_test)
